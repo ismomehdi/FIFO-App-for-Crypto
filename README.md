@@ -2,7 +2,7 @@
 
 This app calculates your cryptocurrency profits and losses. It is designed for Finnish audience.
 
-## How Crypto Taxes Work in Finland?
+## Crypto Taxes in Finland
 
 
 
