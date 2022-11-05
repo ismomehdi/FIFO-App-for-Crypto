@@ -12,8 +12,8 @@ FIFO – First In, First Out – is an asset management principle in which asset
 
   For example:
    
-  Linda buys 1 bitcoin for 40 000€ on monday.
-  Linda buys 2 bitcoin for 30 000€ on tuesday.
-  Linda sells 2 bitcoin for 35 000€ on wednesday.
+  Linda buys 1 bitcoin for 40 000€ on monday.
+  Linda buys 2 bitcoin for 30 000€ on tuesday.
+  Linda sells 2 bitcoin for 35 000€ on wednesday.
   
 
