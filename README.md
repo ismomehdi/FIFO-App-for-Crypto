@@ -8,10 +8,14 @@ Income received from trading cryptocurrencies is taxable and you are required to
 
 ### What's FIFO?
 
-FIFO – First In, First Out – is an asset management principle in which assets bought first are sold first.
+FIFO – *First In, First Out* – is an asset management principle in which assets bought first are sold first.
 
 ### So What's Tricky About It?
 
-Well, imagine calculating costs of assets on hundreds or even thousands of trades.
+Well, imagine calculating costs of cryptocurrencies on hundreds or even thousands of trades. Trying to keep track of which piece of Bitcoin you bought first is difficult and tedious.
+
+### Deemed Acquisition Cost
+
+There's also this thing called the *deemed acquisition cost* which you can use alternatively. The deemed acquisition cost of your asset is 20% of the selling price or 40% if you owned the asset for over 10 years.  
 
 
