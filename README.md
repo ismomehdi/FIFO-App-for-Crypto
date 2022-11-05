@@ -8,5 +8,5 @@ Income received from trading cryptocurrencies is taxable and you are required to
 
 ### What's FIFO?
 
-
+FIFO – First In, First Out – is an asset management principle in which assets bought first are sold first. 
 
