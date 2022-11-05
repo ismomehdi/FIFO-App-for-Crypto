@@ -16,7 +16,7 @@ Well, imagine calculating costs of cryptocurrencies on hundreds or even thousand
 
 ### Deemed Acquisition Cost
 
-There's also this thing called the *deemed acquisition cost* which you can use alternatively. The deemed acquisition cost of your asset is 20% of the selling price or 40% if you've owned the asset for over 10 years. Using the deemed acquisition cost might make sense if you've made large enough gains on a trade (if the real cost is less than the deemed one).
+There's also this thing called the *deemed acquisition cost* which you can use alternatively. The deemed acquisition cost of your asset is 20% of the selling price or 40% if you've owned the asset for over 10 years. Using the deemed acquisition cost might make sense if the real cost of an asset is less than the deemed one (greater cost means less taxes).
 
 
 
