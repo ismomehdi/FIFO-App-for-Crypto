@@ -18,8 +18,16 @@ Well, imagine calculating costs of cryptocurrencies on hundreds or even thousand
 
 You could use the *deemed acquisition cost* alternatively. The deemed acquisition cost of your asset is 20% of the selling price or 40% if you've owned the asset for over 10 years. Using the deemed acquisition cost might make sense if the real cost of an asset is less than the deemed one (as greater cost means less taxes).
 
-## Other Crypto Tax Apps
+## Crypto Tax Apps
 
 * There's many crypto tax applications online which rely on automatically fetching and processing transaction data. However, often there's a lot of mistakes in the processed data and users have to manually go through everything to check for whatever happens to be wrong.
-* There's already an existing [FIFO calculator](https://www.vero.fi/tietoa-verohallinnosta/yhteystiedot-ja-asiointi/verohallinnon_laskuri/fifo-laskuri/) in Tax Administration’s website. It's not very useful; it only supports one cryptocurrency at a time and therefore using it would be awkward for anyone with more than one asset in their portfolio.
+* There's a [FIFO calculator](https://www.vero.fi/tietoa-verohallinnosta/yhteystiedot-ja-asiointi/verohallinnon_laskuri/fifo-laskuri/) in Tax Administration’s website. It's not very useful; it only supports one cryptocurrency at a time and therefore using it would be awkward for anyone with more than one asset in their portfolio.
+
+## About the App (App Goals)
+
+* An easy and simple tool for manually keeping record of crypto trades as they come about.
+* Calculates profit and loss automatically using the FIFO principle.
+* Supports multiple assets.
+*  
+
 
