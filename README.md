@@ -20,7 +20,6 @@ You could use the *deemed acquisition cost* alternatively. The deemed acquisitio
 
 ## About the App / Goals for the App
 
-* There's many crypto tax applications online which rely on automatically fetching and processing transaction data. However, often there's a lot of mistakes in the processed data and users have to manually go through everything to check for whatever happens to be wrong. This app doesn't automatically fetch and process data. Rather this app's goal is to be **an easy and simple tool for manually keeping record of crypto trades as they come about**.
-* 
-
+* There's many crypto tax applications online which rely on automatically fetching and processing transaction data. However, often there's a lot of mistakes in the processed data and users have to manually go through everything to check for whatever happens to be wrong.
+* There's already an existing [FIFO calculator](https://www.vero.fi/tietoa-verohallinnosta/yhteystiedot-ja-asiointi/verohallinnon_laskuri/fifo-laskuri/) in Tax Administration’s website. However, it's not very useful; it only supports one cryptocurrency at a time and therefore using it would be awkward for anyone with more than one asset in their portfolio.
 
