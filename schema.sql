@@ -1,0 +1,29 @@
+CREATE TABLE users (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL 
+);
+
+CREATE TABLE tx (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    user_id BIGINT REFERENCES users (id),
+    datetime TIMESTAMP NOT NULL,
+    ticker TEXT NOT NULL,
+    note TEXT
+);
+
+CREATE TABLE buy (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    tx_id BIGINT REFERENCES tx (id),
+    amount NUMERIC NOT NULL,
+    price NUMERIC NOT NULL,
+    fee NUMERIC
+);
+
+CREATE TABLE sell (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    tx_id BIGINT REFERENCES tx (id),
+    amount NUMERIC NOT NULL,
+    price NUMERIC NOT NULL,
+    fee NUMERIC
+);
