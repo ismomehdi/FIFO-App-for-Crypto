@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Transaction History</h2>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>Ticker</th>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Gain Or Cost</th>
+  </tr>
+  {% for transaction in transactions %}
+  <tr>
+    <td>{{transaction.datetime}}</td>
+    <td>{{transaction.ticker}}</td>
+    <td>type</td>
+    <td>{{transaction}}</td>
+    <td></td>
+  </tr>
+  {% endfor %}
+</table>
+
+<br>
+<a href="/">Go back</a>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html> 
+<html>
+
+<body>
+    <h1>Buy</h1>
+    <div>
+        <form action="/submit/buy" method="POST">
+
+            <label for="datetime">Date & Time</label><br>
+            <input type="datetime-local" name="datetime" autocomplete="off"><br>
+
+            <label for="ticker">Ticker</label><br>
+            <input type="text" name="ticker" autocomplete="off"><br>
+
+            <label for="amount">Amount</amount><br>
+            <input type="number" name="amount" autocomplete="off"><br>
+            
+            <label for="price">Price</label><br>
+            <input type="number" name="price" autocomplete="off"><br>
+            
+            <label for="fee">Fee</label><br>
+            <input type="number" name="fee" autocomplete="off"><br>
+
+            <label for="note">Note</label><br>
+            <input type="text" name="note" autocomplete="off"><br>
+
+            <br><input type="submit" value="Lähetä"><br>
+        </form>
+    </div>
+    <br>
+    <a href="/">Go back</a>
+</body>
+
+</html>
