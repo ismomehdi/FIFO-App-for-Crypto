@@ -9,21 +9,8 @@ CREATE TABLE tx (
     user_id BIGINT REFERENCES users (id),
     datetime TIMESTAMP NOT NULL,
     ticker TEXT NOT NULL,
+    amount NUMERIC NOT NULL,
+    price NUMERIC NOT NULL,
+    fee NUMERIC,
     note TEXT
-);
-
-CREATE TABLE buy (
-    id BIGSERIAL NOT NULL PRIMARY KEY,
-    tx_id BIGINT REFERENCES tx (id),
-    amount NUMERIC NOT NULL,
-    price NUMERIC NOT NULL,
-    fee NUMERIC
-);
-
-CREATE TABLE sell (
-    id BIGSERIAL NOT NULL PRIMARY KEY,
-    tx_id BIGINT REFERENCES tx (id),
-    amount NUMERIC NOT NULL,
-    price NUMERIC NOT NULL,
-    fee NUMERIC
 );

@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
-import os, sys
+import os
 
 load_dotenv()
 
@@ -34,19 +34,13 @@ def submit_buy():
     fee = request.form["fee"]
     note = request.form["note"]
 
-    sql = "INSERT INTO tx (user_id, datetime, ticker, note)" \
-        "VALUES (:user_id, :datetime, :ticker, :note) RETURNING ID"
+    sql = "INSERT INTO tx (user_id, datetime, ticker, " \
+        "amount, price, fee, note) VALUES (:user_id, :datetime, " \
+        ":ticker, :amount, :price, :fee, :note)"
 
-    result = db.session.execute(sql, {"user_id":user_id, 
-        "datetime":datetime, "ticker":ticker, "note":note})
-
-    tx_id = result.fetchone()[0]
-
-    sql = "INSERT INTO buy (tx_id, amount, price, fee) VALUES" \
-        "(:tx_id, :amount, :price, :fee)"
-    
-    db.session.execute(sql, {"tx_id":tx_id, "amount":amount, 
-        "price":price, "fee":fee})
+    db.session.execute(sql, {"user_id":user_id,
+        "datetime":datetime, "ticker":ticker, "amount":amount, 
+        "price":price, "fee":fee, "note":note})
 
     db.session.commit()
 
@@ -62,19 +56,13 @@ def submit_sell():
     fee = request.form["fee"]
     note = request.form["note"]
 
-    sql = "INSERT INTO tx (user_id, datetime, ticker, note)" \
-        "VALUES (:user_id, :datetime, :ticker, :note) RETURNING ID"
+    sql = "INSERT INTO tx (user_id, datetime, ticker, " \
+        "amount, price, fee, note) VALUES (:user_id, :datetime, " \
+        ":ticker, :amount, :price, :fee, :note)"
 
-    result = db.session.execute(sql, {"user_id":user_id, 
-        "datetime":datetime, "ticker":ticker, "note":note})
-
-    tx_id = result.fetchone()[0]
-
-    sql = "INSERT INTO sell (tx_id, amount, price, fee) VALUES" \
-        "(:tx_id, :amount, :price, :fee)"
-    
-    db.session.execute(sql, {"tx_id":tx_id, "amount":amount, 
-        "price":price, "fee":fee})
+    db.session.execute(sql, {"user_id":user_id,
+        "datetime":datetime, "ticker":ticker, "amount":f"-{amount}", 
+        "price":price, "fee":fee, "note":note})
 
     db.session.commit()
 
@@ -83,7 +71,10 @@ def submit_sell():
 @app.route("/transactions")
 def transactions():
 
-    sql = "SELECT * FROM tx WHERE user_id=:user_id"
+    sql = "SELECT id, datetime, ticker, @amount AS amount, price, fee, note, " \
+        "(CASE WHEN amount > 0 THEN 'Buy' ELSE 'Sell' END) AS type " \
+        "FROM tx WHERE user_id = :user_id"
+
     result = db.session.execute(sql, {"user_id":user_id})
     transactions = result.fetchall()
 
