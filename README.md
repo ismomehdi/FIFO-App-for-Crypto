@@ -4,7 +4,9 @@ Lue sovelluksen kuvaus [täältä](https://github.com/ismomehdi/FIFO-App-for-Cry
 
 ## Välipalautus 2
 
-Sovelluksella on pääpiirteissään toimiva pohja, jonka avulla tietokantaan voi lisätä ostoja ja myyntejä. FIFO-laskennan suorittaminen tietokannassa osoittautui haastavaksi ja sen toteutus on vielä kesken. Myös esimerkiksi virheiden käsittely puuttuu vielä. Sovellus ei ole vielä tuotannossa.
+Sovelluksella on pääpiirteissään toimiva pohja, jonka avulla tietokantaan voi lisätä ostoja ja myyntejä. FIFO-laskennan suorittaminen tietokannassa osoittautui haastavaksi ja sen toteutus on vielä kesken. Myös esimerkiksi virheiden käsittely puuttuu vielä. 
+
+Sovellus löytyy [täältä](https://tsoha-fifo-app.fly.dev/).
 
 ## Näyttökaappauksia
 
