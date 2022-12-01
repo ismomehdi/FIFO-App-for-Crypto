@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
+from fifo_sql import fifo_sql
 import os
 
 load_dotenv()
@@ -70,12 +71,7 @@ def submit_sell():
 
 @app.route("/transactions")
 def transactions():
-
-    sql = "SELECT id, datetime, ticker, @amount AS amount, price, fee, note, " \
-        "(CASE WHEN amount > 0 THEN 'Buy' ELSE 'Sell' END) AS type " \
-        "FROM tx WHERE user_id = :user_id"
-
-    result = db.session.execute(sql, {"user_id":user_id})
+    result = db.session.execute(fifo_sql, {"user_id":user_id})
     transactions = result.fetchall()
 
     return render_template("transactions.html", transactions=transactions)
