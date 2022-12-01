@@ -17,6 +17,10 @@ user_id = 1
 def index():
     return render_template("index.html")
 
+@app.route("/feedback")
+def feedback():
+    return render_template("feedback.html")
+
 @app.route("/buy")
 def buy():
     return render_template("buy.html")
@@ -68,6 +72,19 @@ def submit_sell():
     db.session.commit()
 
     return redirect("/sell")
+
+@app.route("/submit/feedback", methods=["POST"])
+def submit_feedback():
+    name = request.form["name"]
+    message = request.form["message"]
+
+    sql = "INSERT INTO feedback (name, message)"  \
+        "VALUES (:name, :message)"
+    
+    db.session.execute(sql, {"name":name, "message":message})
+    db.session.commit()
+
+    return redirect("/")
 
 @app.route("/transactions")
 def transactions():

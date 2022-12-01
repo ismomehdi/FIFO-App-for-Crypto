@@ -14,3 +14,9 @@ CREATE TABLE tx (
     fee NUMERIC,
     note TEXT
 );
+
+CREATE TABLE feedback (
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
+    message TEXT NOT NULL 
+);
