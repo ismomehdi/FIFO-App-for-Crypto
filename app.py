@@ -78,6 +78,11 @@ def submit_feedback():
     name = request.form["name"]
     message = request.form["message"]
 
+    if len(name) > 100:
+        return render_template("error.html", error="The name is too long")
+    if len(message) > 5000:
+        return render_template("error.html", error="The message is too long")
+
     sql = "INSERT INTO feedback (name, message)"  \
         "VALUES (:name, :message)"
     
