@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from fifo_sql import fifo_sql
@@ -16,6 +16,19 @@ user_id = 1
 @app.route("/")
 def index():
     return render_template("index.html")
+
+@app.route("/login",methods=["POST"])
+def login():
+    username = request.form["username"]
+    password = request.form["password"]
+    # TODO: check username and password
+    session["username"] = username
+    return redirect("/")
+
+@app.route("/logout")
+def logout():
+    del session["username"]
+    return redirect("/")
 
 @app.route("/feedback")
 def feedback():

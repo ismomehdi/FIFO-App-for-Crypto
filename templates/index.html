@@ -5,13 +5,25 @@
     <title>Fifo App</title>
 </head>
 
+{% if session.username %}
+<p>Logged in as <i>{{ session.username }}</i>. <a href="/logout">Log out</a></p>
 <body>
-    <h1>Fifo App Test</h1>
+    <h1>Fifo App</h1>
     <a href="/buy">Buy</a><br>
     <a href="/sell">Sell</a><br>
     <a href="/transactions">History</a><br><br>
     <a href="/feedback">Feedback</a><br>
     <p>© 2022</p>
 </body>
-
 </html>
+{% else %}
+<h1>Fifo App</h1>
+<form action="/login" method="POST">
+<p>Username:<br>
+<input type="text" name="username" autocomplete="off"></p>
+<p>Password:<br>
+<input type="password" name="password" autocomplete="off"></p>
+<input type="submit" value="Log in">
+</form>
+{% endif %}
+
