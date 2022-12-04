@@ -30,8 +30,7 @@ tr:nth-child(even) {
     <th>Type</th>
     <th>Amount</th>
     <th>Price</th>
-    <th>Total Profit & Loss</th>
-    <th>Profit & Loss %</th>
+    <th>Profit & Loss</th>
   </tr>
   {% for transaction in transactions %}
   <tr>
@@ -41,7 +40,6 @@ tr:nth-child(even) {
     <td>{{transaction.amount}}</td>
     <td>{{transaction.price}}</td>
     <td>{{transaction.total_pnl}}</td>
-    <td>{{transaction.pnl_percentage}}</td>
   </tr>
   {% endfor %}
 </table>

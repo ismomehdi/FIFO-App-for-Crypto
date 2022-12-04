@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Fifo App</title>
+</head>
+
+<body>
+    <h1>Fifo App</h1>
+    <form action="/submit/signup" onsubmit="return confirm(this)"method="POST">
+        <p>Username:<br>
+            <input type="text" name="username" autocomplete="off ">
+        </p>
+        <p>Password:<br>
+            <input type="password" name="password" autocomplete="off">
+        <p>Confirm Password:<br>
+            <input type="password" name="confirm_password" autocomplete="off">    
+        </p>
+        <input type="submit" value="Sign up"><br>
+    </form>
+    <br>
+    <a href="/">Go back</a>
+
+    <script>
+        function confirm(form) {
+            if (form.password.value == form.confirm_password.value) {
+                return true;
+            } else {
+                alert("Passwords don't match");
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import check_password_hash, generate_password_hash
 from dotenv import load_dotenv
 from fifo_sql import fifo_sql
 import os
@@ -11,8 +12,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL") #.replace("://
 app.secret_key = os.getenv("SECRET_KEY")
 db = SQLAlchemy(app)
 
-user_id = 1
-
 @app.route("/")
 def index():
     return render_template("index.html")
@@ -21,13 +20,43 @@ def index():
 def login():
     username = request.form["username"]
     password = request.form["password"]
-    # TODO: check username and password
-    session["username"] = username
+
+    sql = "SELECT id, password FROM users WHERE username=:username"
+    result = db.session.execute(sql, {"username":username})
+    user = result.fetchone()    
+    if not user:
+        pass
+    else:
+        password_hash = user.password
+        if check_password_hash(password_hash, password):
+            session["username"] = username
+            session["user_id"] = user.id
+        else:
+            pass
+
     return redirect("/")
 
 @app.route("/logout")
 def logout():
     del session["username"]
+    return redirect("/")
+
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
+@app.route("/submit/signup", methods=["POST"])
+def submit_signup():
+
+    username = request.form["username"]
+    pwd_hash = generate_password_hash(request.form["password"])
+
+
+    sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
+
+    db.session.execute(sql, {"username":username, "password":pwd_hash})
+    db.session.commit()
+
     return redirect("/")
 
 @app.route("/feedback")
@@ -49,16 +78,17 @@ def submit_buy():
     ticker = request.form["ticker"]
     amount = request.form["amount"]
     price = request.form["price"]
-    fee = request.form["fee"]
     note = request.form["note"]
 
+    user_id = session["user_id"]
+
     sql = "INSERT INTO tx (user_id, datetime, ticker, " \
-        "amount, price, fee, note) VALUES (:user_id, :datetime, " \
-        ":ticker, :amount, :price, :fee, :note)"
+        "amount, price, note) VALUES (:user_id, :datetime, " \
+        ":ticker, :amount, :price, :note)"
 
     db.session.execute(sql, {"user_id":user_id,
         "datetime":datetime, "ticker":ticker, "amount":amount, 
-        "price":price, "fee":fee, "note":note})
+        "price":price, "note":note})
 
     db.session.commit()
 
@@ -71,16 +101,17 @@ def submit_sell():
     ticker = request.form["ticker"]
     amount = request.form["amount"]
     price = request.form["price"]
-    fee = request.form["fee"]
     note = request.form["note"]
 
+    user_id = session["user_id"]
+
     sql = "INSERT INTO tx (user_id, datetime, ticker, " \
-        "amount, price, fee, note) VALUES (:user_id, :datetime, " \
-        ":ticker, :amount, :price, :fee, :note)"
+        "amount, price, note) VALUES (:user_id, :datetime, " \
+        ":ticker, :amount, :price, :note)"
 
     db.session.execute(sql, {"user_id":user_id,
         "datetime":datetime, "ticker":ticker, "amount":f"-{amount}", 
-        "price":price, "fee":fee, "note":note})
+        "price":price, "note":note})
 
     db.session.commit()
 
@@ -106,6 +137,7 @@ def submit_feedback():
 
 @app.route("/transactions")
 def transactions():
+    user_id = session["user_id"]
     result = db.session.execute(fifo_sql, {"user_id":user_id})
     transactions = result.fetchall()
 
