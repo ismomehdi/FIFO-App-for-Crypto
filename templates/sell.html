@@ -21,6 +21,8 @@
             <label for="note">Note</label><br>
             <input type="text" name="note" autocomplete="off"><br>
 
+            <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
             <br><input type="submit" value="Submit"><br>
         </form>
     </div>

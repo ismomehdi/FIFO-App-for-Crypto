@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 from dotenv import load_dotenv
 from fifo_sql import fifo_sql
+import secrets
 import os
 
 load_dotenv()
@@ -31,6 +32,7 @@ def login():
         if check_password_hash(password_hash, password):
             session["username"] = username
             session["user_id"] = user.id
+            session["csrf_token"] = secrets.token_hex(16)
         else:
             pass
 
