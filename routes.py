@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app, db
 from db.fifo_sql import fifo_sql
@@ -74,6 +74,8 @@ def sell():
 
 @app.route("/submit/buy", methods=["POST"])
 def submit_buy():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
 
     datetime = request.form["datetime"]
     ticker = request.form["ticker"]
@@ -98,6 +100,8 @@ def submit_buy():
 
 @app.route("/submit/sell", methods=["POST"])
 def submit_sell():
+    if session["csrf_token"] != request.form["csrf_token"]:
+        abort(403)
 
     datetime = request.form["datetime"]
     ticker = request.form["ticker"]
