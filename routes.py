@@ -1,9 +1,10 @@
 from flask import render_template, request, redirect, session, abort
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import app, db
-from db.fifo_sql import fifo_sql
+from db.sql_queries import SQLQuery
 import secrets
 
+sql =  SQLQuery(db)
 
 @app.route("/")
 def index():
@@ -15,9 +16,8 @@ def login():
     username = request.form["username"]
     password = request.form["password"]
 
-    sql = "SELECT id, password FROM users WHERE username=:username"
-    result = db.session.execute(sql, {"username": username})
-    user = result.fetchone()
+    user = sql.login(username)
+
     if not user:
         pass
     else:
@@ -43,16 +43,13 @@ def signup():
     return render_template("signup.html")
 
 
+# FIX ERROR HANDLING
 @app.route("/submit/signup", methods=["POST"])
 def submit_signup():
-
     username = request.form["username"]
     pwd_hash = generate_password_hash(request.form["password"])
 
-    sql = "INSERT INTO users (username, password) VALUES (:username, :password)"
-
-    db.session.execute(sql, {"username": username, "password": pwd_hash})
-    db.session.commit()
+    sql.signup(username, pwd_hash) 
 
     return redirect("/")
 
@@ -71,59 +68,45 @@ def buy():
 def sell():
     return render_template("sell.html")
 
-
+# FIX ERROR HANDLING
 @app.route("/submit/buy", methods=["POST"])
 def submit_buy():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
 
-    datetime = request.form["datetime"]
-    ticker = request.form["ticker"]
-    amount = request.form["amount"]
-    price = request.form["price"]
-    note = request.form["note"]
+    tx_details = {}
 
-    user_id = session["user_id"]
+    tx_details["datetime"] = request.form["datetime"]
+    tx_details["ticker"] = request.form["ticker"]
+    tx_details["amount"] = request.form["amount"]
+    tx_details["price"] = request.form["price"]
+    tx_details["note"] = request.form["note"]
+    tx_details["user_id"] = session["user_id"]
 
-    sql = "INSERT INTO tx (user_id, datetime, ticker, " \
-        "amount, price, note) VALUES (:user_id, :datetime, " \
-        ":ticker, :amount, :price, :note)"
-
-    db.session.execute(sql, {"user_id": user_id,
-                             "datetime": datetime, "ticker": ticker, "amount": amount,
-                             "price": price, "note": note})
-
-    db.session.commit()
+    sql.submit_tx(tx_details, "buy")
 
     return redirect("/buy")
 
-
+# FIX ERROR HANDLING
 @app.route("/submit/sell", methods=["POST"])
 def submit_sell():
     if session["csrf_token"] != request.form["csrf_token"]:
         abort(403)
 
-    datetime = request.form["datetime"]
-    ticker = request.form["ticker"]
-    amount = request.form["amount"]
-    price = request.form["price"]
-    note = request.form["note"]
+    tx_details = {}
 
-    user_id = session["user_id"]
+    tx_details["datetime"] = request.form["datetime"]
+    tx_details["ticker"] = request.form["ticker"]
+    tx_details["amount"] = request.form["amount"]
+    tx_details["price"] = request.form["price"]
+    tx_details["note"] = request.form["note"]
+    tx_details["user_id"] = session["user_id"]
 
-    sql = "INSERT INTO tx (user_id, datetime, ticker, " \
-        "amount, price, note) VALUES (:user_id, :datetime, " \
-        ":ticker, :amount, :price, :note)"
-
-    db.session.execute(sql, {"user_id": user_id,
-                             "datetime": datetime, "ticker": ticker, "amount": f"-{amount}",
-                             "price": price, "note": note})
-
-    db.session.commit()
+    sql.submit_tx(tx_details, "sell")
 
     return redirect("/sell")
 
-
+# FIX ERROR HANDLING
 @app.route("/submit/feedback", methods=["POST"])
 def submit_feedback():
     name = request.form["name"]
@@ -134,19 +117,13 @@ def submit_feedback():
     if len(message) > 5000:
         return render_template("error.html", error="The message is too long")
 
-    sql = "INSERT INTO feedback (name, message)"  \
-        "VALUES (:name, :message)"
-
-    db.session.execute(sql, {"name": name, "message": message})
-    db.session.commit()
+    sql.submit_feedback(name, message)
 
     return redirect("/")
-
 
 @app.route("/transactions")
 def transactions():
     user_id = session["user_id"]
-    result = db.session.execute(fifo_sql, {"user_id": user_id})
-    transactions = result.fetchall()
+    transactions = sql.fifo(user_id)
 
     return render_template("transactions.html", transactions=transactions)
