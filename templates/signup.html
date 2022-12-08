@@ -9,12 +9,12 @@
     <h1>Fifo App</h1>
     <form action="/submit/signup" onsubmit="return confirm(this)"method="POST">
         <p>Username:<br>
-            <input type="text" name="username" autocomplete="off ">
+            <input type="text" name="username" autocomplete="off " required>
         </p>
         <p>Password:<br>
-            <input type="password" name="password" autocomplete="off">
+            <input type="password" name="password" autocomplete="off" required>
         <p>Confirm Password:<br>
-            <input type="password" name="confirm_password" autocomplete="off">    
+            <input type="password" name="confirm_password" autocomplete="off" required>    
         </p>
         <input type="submit" value="Sign up"><br>
     </form>
