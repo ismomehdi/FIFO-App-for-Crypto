@@ -1,7 +1,7 @@
 CREATE VIEW tx_view AS
 SELECT
     id,
-    user_id,
+    portfolio_id,
     datetime,
     ticker,
     @amount AS amount,
