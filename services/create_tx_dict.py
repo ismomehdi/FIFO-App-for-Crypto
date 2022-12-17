@@ -12,7 +12,7 @@ def create_tx_dict(type: str):
     tx_data['portfolio_id'] = session['portfolio']
     tx_data['datetime'] = request.form['datetime']
     tx_data['ticker'] = request.form['ticker']
-    tx_data['price'] = request.form['price']
+    tx_data['total_price'] = request.form['total_price']
     tx_data['note'] = request.form['note']
 
     return tx_data

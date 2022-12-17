@@ -9,7 +9,6 @@ from main.query import Query
 
 query = Query(db)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')

@@ -18,9 +18,8 @@
 --      This expression calculates the cumulative sum of the negated amount 
 --      within each ticker partition.
 --
--- price:
+-- total_price:
 --      This column is selected from the tx table without any modification.
-
 
 CREATE VIEW sell_amounts AS
 SELECT
@@ -29,7 +28,7 @@ SELECT
     datetime,
     - amount AS amount,
     SUM(- amount) OVER partition_by_ticker AS cumulative_amount,
-    price
+    total_price
 FROM
     tx
 WHERE

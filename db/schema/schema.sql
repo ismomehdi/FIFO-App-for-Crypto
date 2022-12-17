@@ -16,7 +16,7 @@ CREATE TABLE tx (
     datetime TIMESTAMP NOT NULL,
     ticker TEXT NOT NULL,
     amount NUMERIC NOT NULL,
-    price NUMERIC NOT NULL,
+    total_price NUMERIC NOT NULL,
     fee NUMERIC,
     note TEXT
 );

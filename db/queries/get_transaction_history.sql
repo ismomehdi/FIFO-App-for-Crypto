@@ -1,20 +1,24 @@
 SELECT
-    tx_view.id,
-    tx_view.datetime,
-    tx_view.ticker,
-    tx_view.amount,
-    tx_view.price,
-    tx_view.fee,
-    tx_view.note,
-    tx_view.type,
-    sell_stats_view.total_pnl
+    tx.id,
+    tx.datetime,
+    tx.ticker,
+    @amount AS amount,
+    tx.total_price,
+    tx.fee,
+    tx.note,
+    type.type,
+    profit_and_loss.total_pnl
 FROM
-    tx_view
+    tx
 LEFT JOIN 
-    sell_stats_view
+    profit_and_loss
 ON 
-    tx_view.id = sell_stats_view.id
+    tx.id = profit_and_loss.id
+LEFT JOIN
+    type
+ON
+    tx.id = type.id
 WHERE
-    tx_view.portfolio_id = 1
+    portfolio_id = :portfolio_id
 ORDER BY 
-    datetime, tx_view.id;
+    datetime DESC, id DESC;

@@ -29,7 +29,7 @@ tr:nth-child(even) {
     <th>Ticker</th>
     <th>Type</th>
     <th>Amount</th>
-    <th>Price</th>
+    <th>Total Price</th>
     <th>Profit & Loss</th>
   </tr>
   {% for transaction in transactions %}
@@ -38,7 +38,7 @@ tr:nth-child(even) {
     <td>{{transaction.ticker}}</td>
     <td>{{transaction.type}}</td>
     <td>{{transaction.amount}}</td>
-    <td>{{transaction.price}}</td>
+    <td>{{transaction.total_price}}</td>
     <td>{{transaction.total_pnl}}</td>
   </tr>
   {% endfor %}

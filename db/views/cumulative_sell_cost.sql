@@ -11,7 +11,7 @@
 --      This column is selected from the sell_amounts table without any modification.
 --
 -- total_price:
---      This expression calculates the total sell price by multiplying the price and amount columns.
+--      This column is selected from the sell_amounts table without any modification.
 --
 -- cumulative_sell_cost:
 --      This expression calculates the cumulative cost of the sell amount for each transaction. 
@@ -21,11 +21,11 @@
 
 
 CREATE VIEW cumulative_sell_cost AS
-SELECT DISTINCT
-    id,
+SELECT
+    DISTINCT ON (id) id,
     datetime,
     sell_amounts.ticker,
-    price * amount AS total_price,
+    total_price,
     ROUND(previous_cumulative_cost + ((sell_amounts.cumulative_amount - buy_amounts.previous_cumulative_amount) 
         / (buy_amounts.cumulative_amount - buy_amounts.previous_cumulative_amount)) 
         * (cumulative_cost - previous_cumulative_cost), 2) AS cumulative_sell_cost
@@ -36,5 +36,5 @@ FROM
     AND sell_amounts.cumulative_amount <= buy_amounts.cumulative_amount
     AND sell_amounts.ticker = buy_amounts.ticker
 ORDER BY
-    datetime, id
+    id, datetime
 ;

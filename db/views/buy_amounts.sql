@@ -15,12 +15,11 @@
 --      the current row in the partition.
 --
 -- cumulative_cost: 
---      This expression calculates the cumulative sum of the amount * price calculation within 
---      each ticker partition.
+--      This expression calculates the cumulative sum of the total_price within each ticker partition.
 --
 -- previous_cumulative_cost: 
---      This expression calculates the cumulative sum of the amount * price calculation within 
---      each ticker partition, but only for rows that come before the current row in the partition. 
+--      This expression calculates the cumulative sum of the total_price within each ticker
+--      partition, but only for rows that come before the current row in the partition. 
 --      The COALESCE function is used to return a default value of 0 if there are no rows before 
 --      the current row in the partition.
 
@@ -29,8 +28,8 @@ SELECT
     ticker,
     SUM(amount) OVER partition_by_ticker AS cumulative_amount,
     COALESCE(SUM(amount) OVER previous_rows, 0) as previous_cumulative_amount,
-    SUM(amount * price) OVER partition_by_ticker AS cumulative_cost,
-    COALESCE(SUM(amount * price) OVER previous_rows, 0) AS previous_cumulative_cost
+    SUM(total_price) OVER partition_by_ticker AS cumulative_cost,
+    COALESCE(SUM(total_price) OVER previous_rows, 0) AS previous_cumulative_cost
 FROM
     tx
 WHERE
