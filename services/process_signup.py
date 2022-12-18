@@ -5,9 +5,9 @@ from werkzeug.security import generate_password_hash
 
 query = Query(db)
 
-def process_signup(username, password):
-    if query.username_exists(username):
-        return 'Username already exists'
+def username_exists(username):
+    return query.username_exists(username)
 
+def process_signup(username, password):
     pwd_hash = generate_password_hash(password)
     query.signup(username, pwd_hash)

@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, session
 from services.create_tx_dict import create_tx_dict
 from services.process_login import process_login
-from services.process_signup import process_signup
+from services.process_signup import process_signup, username_exists
 from services.check_csrf import check_csrf
 from services.errors import feedback_errors
 from app import app, db
@@ -40,8 +40,12 @@ def submit_signup():
     username = request.form['username']
     password = request.form["password"]
 
-    process_signup(username, password)
+    if username_exists(username):
+        return render_template("error.html", 
+            message="Oops, username already exists. Please choose another one.",
+            link="/signup")
 
+    process_signup(username, password)
     return redirect("/")
 
 
