@@ -1,14 +1,18 @@
 # FIFO App for Crypto (*Work in Progress...*)
 
-Lue sovelluksen kuvaus [täältä](https://github.com/ismomehdi/FIFO-App-for-Crypto/blob/main/about.md).
+Lue sovelluksen kuvaus [täältä](documentation/about.md).
 
-## Välipalautus 3
+## Lopullinen palautus
 
-Sovelluksella on pääpiirteissään toimiva pohja, jonka avulla tietokantaan voi lisätä ostoja ja myyntejä. Sovellus laskee tietokantaan lisättyjen myyntien tuotot ja tappiot FIFO-periaatteen mukaisesti SQL:ssä. Sovellukseen voi rekisteröityä ja kirjautua sisään. Sivuilla voi myös jättää palautetta.
-
-Virheiden käsittely puuttuu vielä. Tuotannossa olevassa sovelluksessa vaikuttaisi olevan bugi, jonka vuoksi History-sivu ei ensimmäisellä latauskerralla toimi. Sen jälkeen bugi ei kuitenkaan vaikuta toistuvan.
-
-Tehtävää on virheiden käsittelyn lisäksi myös koodin refaktoroinnissa ja jakamisessa moduuleihin sekä SQL-komentojen yksinkertaistamisessa. CSRF-haavoittuvuus täytyy vielä korjata.
+Sovellukseen voi luoda tunnuksen ja kirjautua sisään. Sisäänkirjautunut käyttäjä voi lisätä sovellukseen ostoja sekä myyntejä ja tarkastella transaktiohistoriaansa. Sovellus lisää transaktiot tietokantaan ja laskee realisoidut tuotot ja tappiot [FIFO-periaatteen](https://www.investopedia.com/terms/f/fifo.asp) mukaisesti tuotekohtaisesti. Käyttäjä voi jättää palautetta Feedback-sivulla.
 
 Sovellus löytyy [täältä](https://tsoha-fifo-app.fly.dev/).
+
+### Tulevia kehityskohteita
+
+- Mahdollisuus muokata ja poistaa lisättyjä transaktioita.
+- Toiminto, joka estää myynnin lisäämisen, mikäli myyntiä edeltäviä ostoja ei ole tarpeeksi.
+- Mahdollisuus lisätä useampi portfolio ja määrittää vakioportfolio (tietokannassa on jo taulut valmiina).
+- FIFO-laskennasta vastaavan SQL-komennon optimointi.
+- Käyttöliittymän suunnittelu ReactJS:lla.
 
