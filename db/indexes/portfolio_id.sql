@@ -1,4 +1,3 @@
-CREATE INDEX 
-    portfolio_id_index 
-ON 
-    tx(portfolio_id);
+CREATE INDEX CONCURRENTLY 
+          ON public.tx 
+       USING btree (portfolio_id);
