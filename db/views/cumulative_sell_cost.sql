@@ -14,7 +14,7 @@
 --      This column is selected from the sell_amounts table without any modification.
 --
 -- cumulative_sell_cost:
---      This expression calculates the cumulative cost of the sell amount for each transaction. 
+--      This expression calculates the cumulative cost of the sell amount for each transaction.
 --      This is used later on by the sell_stats view for calculating the realized gain/loss.
 --
 -- The LEFT JOIN ON clause specifies the conditions that the rows must satisfy.
