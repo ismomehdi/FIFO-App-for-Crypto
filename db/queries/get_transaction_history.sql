@@ -15,6 +15,6 @@ LEFT JOIN
 ON 
     tx.id = profit_and_loss.id
 WHERE
-    portfolio_id = 2
+    portfolio_id = :portfolio_id
 ORDER BY 
     datetime DESC, id DESC;
