@@ -6,7 +6,7 @@
     <div>
         <form action="/submit/sell" method="POST">
             <label for="datetime">Date & Time</label><br>
-            <input type="datetime-local" name="datetime" autocomplete="off" required><br>
+            <input type="datetime-local" name="datetime" autocomplete="off" min="2009-01-03T00:00" max="3000-01-01T00:00" required><br>
 
             <label for="ticker">Ticker</label><br>
             <input type="text" name="ticker" autocomplete="off" required><br>

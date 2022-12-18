@@ -2,12 +2,11 @@
 <html>
 
 <body>
-
     <form action="/submit/buy" method="POST">
     <h1>Buy</h1>
     <div>
-            <label for="datetime">Date & Time</label><br>
-            <input type="datetime-local" name="datetime" autocomplete="off" required><br>
+            <label for="datetime-local">Date & Time</label><br>
+            <input type="datetime-local" name="datetime" autocomplete="off" min="2009-01-03T00:00" max="3000-01-01T00:00" required><br>
 
             <label for="ticker">Ticker</label><br>
             <input type="text" name="ticker" autocomplete="off" required><br>
@@ -29,5 +28,4 @@
     <br>
     <a href="/">Go back</a>
 </body>
-
 </html>
