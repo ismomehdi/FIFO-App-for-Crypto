@@ -13,7 +13,7 @@ def build(ctx):
         ctx.run('psql < db/views/sell_amounts.sql', pty=True)
         ctx.run('psql < db/views/cumulative_sell_cost.sql', pty=True)
         ctx.run('psql < db/views/profit_and_loss.sql', pty=True)
-        ctx.run('psql < db/views/type.sql', pty=True)
+        ctx.run('psql < db/indexes/portfolio_id.sql', pty=True)
     except:
         raise Exception('Failed to build database. Make sure you are in the root directory of the project.')
 

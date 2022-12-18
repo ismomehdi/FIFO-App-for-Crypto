@@ -6,7 +6,6 @@ from services.check_csrf import check_csrf
 from services.errors import feedback_errors
 from app import app, db
 from main.query import Query
-from db.for_dev.generate_mock import generate_mock
 
 query = Query(db)
 
