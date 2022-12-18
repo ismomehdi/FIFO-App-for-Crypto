@@ -9,7 +9,7 @@
             <input type="datetime-local" name="datetime" autocomplete="off" min="2009-01-03T00:00" max="3000-01-01T00:00" required><br>
 
             <label for="ticker">Ticker</label><br>
-            <input type="text" name="ticker" autocomplete="off" required><br>
+            <input type="text" name="ticker" autocomplete="off" maxlength="10" required><br>
 
             <label for="amount">Amount</amount><br>
             <input type="number" name="amount" autocomplete="off" step="any" min=0 required><br>
@@ -18,7 +18,7 @@
             <input type="number" name="total_price" autocomplete="off" step="any" min=0 required><br>
 
             <label for="note">Note</label><br>
-            <input type="text" name="note" autocomplete="off"><br>
+            <input type="text" name="note" autocomplete="off" maxlength="100"><br>
 
             <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}"><br>
 
