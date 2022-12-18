@@ -18,6 +18,18 @@ def build(ctx):
         raise Exception('Failed to build database. Make sure you are in the root directory of the project.')
 
 @task
+def buildfly(ctx):
+    try:
+        ctx.run('fly postgres connect -a tsoha-fifo-db < db/schema/schema.sql', pty=True)
+        ctx.run('fly postgres connect -a tsoha-fifo-db < db/views/buy_amounts.sql', pty=True)
+        ctx.run('fly postgres connect -a tsoha-fifo-db < db/views/sell_amounts.sql', pty=True)
+        ctx.run('fly postgres connect -a tsoha-fifo-db < db/views/cumulative_sell_cost.sql', pty=True)
+        ctx.run('fly postgres connect -a tsoha-fifo-db < db/views/profit_and_loss.sql', pty=True)
+        ctx.run('fly postgres connect -a tsoha-fifo-db < db/indexes/portfolio_id.sql', pty=True)
+    except:
+        raise Exception('Failed to build database. Make sure you are in the root directory of the project.')
+
+@task
 def destroy(ctx):
     try:
         ctx.run('psql < db/for_dev/destroy.sql', pty=True)
