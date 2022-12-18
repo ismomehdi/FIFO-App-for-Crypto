@@ -6,7 +6,7 @@ SELECT
     tx.total_price,
     tx.fee,
     tx.note,
-    type.type,
+    COALESCE(profit_and_loss.type, 'Buy') AS type,
     profit_and_loss.total_pnl
 FROM
     tx
@@ -14,11 +14,7 @@ LEFT JOIN
     profit_and_loss
 ON 
     tx.id = profit_and_loss.id
-LEFT JOIN
-    type
-ON
-    tx.id = type.id
 WHERE
-    portfolio_id = :portfolio_id
+    portfolio_id = 2
 ORDER BY 
     datetime DESC, id DESC;

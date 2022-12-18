@@ -4,6 +4,10 @@
 -- id:
 --     This column is selected from the cumulative_sell_cost table without any modification.
 --
+-- type:
+--     This column is set to 'sell' for each row. Later on, this column will be used to determine sell 
+--      transactions.
+--
 -- total_pnl:
 --      This expression calculates the total profit and loss for each transaction. The result 
 --      is cast to a numeric value with 18 digits and 2 decimal places.
@@ -11,6 +15,7 @@
 CREATE VIEW profit_and_loss AS
 SELECT
     id,
+    'Sell' AS type,
     (total_price - (cumulative_sell_cost - COALESCE(LAG(cumulative_sell_cost) OVER partition_by_ticker, 0)))
         ::numeric(18,2)  AS total_pnl
 FROM
