@@ -16,3 +16,7 @@ Sovellus löytyy [täältä](https://tsoha-fifo-app.fly.dev/).
 - FIFO-laskennasta vastaavan SQL-komennon optimointi.
 - Käyttöliittymän suunnittelu ReactJS:lla.
 
+### Internal Server Error
+
+Käyttäjä saattaa törmätä Internal Server Error -sivuun, jos tietokanta ei ole ollut aktiivisena hetkeen. Tähän lienee syy Fly.io:ssa, joka [aikakatkaisee käyttämättömän tietokantayhteyden](https://community.fly.io/t/postgresql-connection-issues-have-returned/6424). Ongelma ratkeaa, kun käyttäjä lataa sivun uudelleen.
+
